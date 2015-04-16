@@ -30,3 +30,18 @@ This is an unmanaged extension.
       curl http://localhost:7474/example/nested/deleteReply?id={nodeId}
   
   ~~~
+8. In python 
+   ~~~python
+
+import requests
+url="http://localhost:7474/example/nested/createComment?comment=This is my first comment " #writing a comment
+requests.get(url)
+url="http://localhost:7474/example/nested/writeReply?id={nodeId}&reply=This is my first reply"
+requests.get(url) #for writing a reply
+url="http://localhost:7474/example/nested/deleteReply?id={nodeId}"
+requests.get(url)
+
+~~~
+
+Here if a reply is removed then child to the deleted nodes become child to the parent node. Concept is as simple as linked lists. :)
+
