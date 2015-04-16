@@ -16,17 +16,17 @@ This is an unmanaged extension.
 4. Start Neo4j server.
 
 5. Writing a comment
-~~curl
+~~~bash
         curl http://localhost:7474/example/nested/createComment?comment=This is my first comment 
-~~
+~~~
 
 6. Writing a reply
-~~curl
+~~~bash
        curl http://localhost:7474/example/nested/writeReply?id={nodeId}&reply=This is my first reply
-~~
+~~~
 
 7.
-  ~~curl
+  ~~~bash
       curl http://localhost:7474/example/nested/deleteReply?id={nodeId}
   
-  ~~
+  ~~~
