@@ -15,7 +15,18 @@ This is an unmanaged extension.
 
 4. Start Neo4j server.
 
-5. Query it over HTTP:
+5. Writing a comment
+~~curl
+        curl http://localhost:7474/example/nested/createComment?comment=This is my first comment 
+~~
 
-        curl http://localhost:7474/example/helloworld
+6. Writing a reply
+~~curl
+       curl http://localhost:7474/example/nested/writeReply?id={nodeId}&reply=This is my first reply
+~~
 
+7.
+  ~~curl
+      curl http://localhost:7474/example/nested/deleteReply?id={nodeId}
+  
+  ~~
