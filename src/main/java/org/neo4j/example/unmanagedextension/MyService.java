@@ -71,9 +71,11 @@ People,Comments
     public Response getHierarchy(@QueryParam("id") long l,@Context GraphDatabaseService db) throws IOException
     {
         /*
-        **This utility is used to get the hierarchy of a given set of comments
-        **Hierarchy can be best visualized in languages like python. An explaination is given in the
-        **readme section.
+        ** This utility is used to get the hierarchy of a given set of comments
+        ** Hierarchy can be best visualized in languages like python. An explaination is given in the
+        ** readme section.
+        ** The best iimplementation to get hierarchy is depth first search and the utility is a simple basic 
+        ** implementation of depth first search
         */
         Transaction tx=db.beginTx();
        Node a=db.getNodeById(l);
