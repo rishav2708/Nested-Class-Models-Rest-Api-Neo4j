@@ -42,6 +42,17 @@ url="http://localhost:7474/example/nested/deleteReply?id={nodeId}"
 requests.get(url)
 
 ~~~
+A utility python script to print the hirarchy
+~~~python
+import requests
+import json
+def getHierarchy(url):
+        l=requests.get(url).json() # a <Response,200> object in python
+        for i in range(len(l)):
+                print i*'-',l[i]
+        
+~~~
 
-Here if a reply is removed then child to the deleted nodes become child to the parent node. Concept is as simple as linked lists. :)
+Here if a reply is removed then child to the deleted nodes become child to the parent node. 
+Concept is as simple as linked lists. :)
 
