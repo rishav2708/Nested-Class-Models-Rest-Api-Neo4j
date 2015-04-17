@@ -40,16 +40,9 @@ url="http://localhost:7474/example/nested/writeReply?id={nodeId}&reply=This is m
 requests.get(url) #for writing a reply
 url="http://localhost:7474/example/nested/deleteReply?id={nodeId}"
 requests.get(url)
-
-~~~
- 9.A utility python script to print the hirarchy
-
-
-
-   ~~~python
-import requests
 import json
-def getHierarchy(url):
+url="http://localhost:7474/example/nested/getHierarchy?id=6103"
+def getHierarchy(url):     # a utility fn to print the hierarchy
         l=requests.get(url).json() # a <Response,200> object in python
         for i in range(len(l)):
                 print i*'-',l[i]
