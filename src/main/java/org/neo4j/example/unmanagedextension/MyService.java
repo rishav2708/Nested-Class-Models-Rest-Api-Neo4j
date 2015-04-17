@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -63,6 +64,41 @@ People,Comments
        Node a=db.getNodeById(l);
        a.createRelationshipTo(replyNode, RelType.PARENT);
        tx.success();
+    }
+    @GET
+    @Path("/getHierarchy")
+    @Produces("application/json")
+    public Response getHierarchy(@QueryParam("id") long l,@Context GraphDatabaseService db) throws IOException
+    {
+        /*
+        **This utility is used to get the hierarchy of a given set of comments
+        **Hierarchy can be best visualized in languages like python. An explaination is given in the
+        **readme section.
+        */
+        Transaction tx=db.beginTx();
+       Node a=db.getNodeById(l);
+       Map<String,Object> mapper=new HashMap<>();
+       
+       List<Object> ans=new ArrayList<>();
+       Stack<Node> st=new Stack();
+       st.push(a);
+       
+      while(!st.isEmpty())
+      {
+          Node b=st.pop();
+          
+          ans.add((String)b.getProperty("reply"));
+          Iterator<Relationship> iter=b.getRelationships(Direction.OUTGOING,RelType.PARENT).iterator();
+          while(iter.hasNext())
+          {
+              Relationship rel=iter.next();
+              Node c=rel.getOtherNode(b);
+              st.push(c);
+          }
+      }
+      //mapper.put("response",ans);
+      tx.success();
+      return Response.ok().entity(new ObjectMapper().writeValueAsString(ans)).build();
     }
     @GET
     @Path("/deleteReply")
